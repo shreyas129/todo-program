@@ -15,7 +15,7 @@ function App() {
 
   let initTodo;
 
-  if (localStorage.getItem("todos") === null ) {
+  if (localStorage.getItem("todos") === null) {
     initTodo = [];
   }
 
@@ -62,10 +62,10 @@ function App() {
   return (
     <>
       <Router>
-      <Header title='My Todos List' searchBar={false} />
-      <AddTodo addTodo={addTodo} />
-      <Todos todos={todos} onDelete={onDelete} />
-      <Footer />
+        <Header title='My Todos List' searchBar={false} />
+        <AddTodo addTodo={addTodo} />
+        <Todos todos={todos} onDelete={onDelete} />
+        <Footer />
       </Router>
     </>
   );
