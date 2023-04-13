@@ -4,12 +4,18 @@ import { Todos } from "./MyComponents/Todos";
 import { Footer } from "./MyComponents/Footer";
 import { AddTodo } from "./MyComponents/AddTodo";
 import React, { useState, useEffect } from 'react';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 
 function App() {
 
   let initTodo;
 
-  if (localStorage.getItem("todos")) {
+  if (localStorage.getItem("todos") === null ) {
     initTodo = [];
   }
 
@@ -31,7 +37,13 @@ function App() {
 
   const addTodo = (title, desc) => {
     console.log("I am adding this todo", title, desc);
-    let sno = todos[todos.length - 1].sno + 1;
+    let sno;
+    if (todos.length === 0) {
+      sno = 0;
+    }
+    else {
+      sno = todos[todos.length - 1].sno + 1;
+    }
     const myTodo = {
       sno: sno,
       title: title,
@@ -39,7 +51,6 @@ function App() {
     }
     setTodos([...todos, myTodo]);
     console.log(myTodo);
-
   }
 
   const [todos, setTodos] = useState(initTodo);
@@ -50,10 +61,12 @@ function App() {
 
   return (
     <>
+      <Router>
       <Header title='My Todos List' searchBar={false} />
       <AddTodo addTodo={addTodo} />
       <Todos todos={todos} onDelete={onDelete} />
       <Footer />
+      </Router>
     </>
   );
 }
